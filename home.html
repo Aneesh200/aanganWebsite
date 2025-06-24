@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>aangan - Urban Gardening</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Roboto:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .hero-bg {
+            background-color: #F8F6F0;
+        }
+
+        .nav-link {
+            @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900;
+        }
+
+        .btn-primary {
+            @apply bg-green-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition duration-300;
+        }
+
+        .btn-secondary {
+            @apply bg-transparent border-2 border-green-800 text-green-800 px-6 py-3 rounded-lg font-medium hover:bg-green-800 hover:text-white transition duration-300;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            color: #1A4D42;
+        }
+
+        .card {
+            @apply bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300;
+        }
+
+        .footer-bg {
+            background-color: #1A4D42;
+        }
+
+        .text-sage-bloom {
+            color: #8EB69B;
+        }
+
+        .bg-sage-bloom {
+            background-color: #8EB69B;
+        }
+
+        .text-terracotta-glow {
+            color: #D4A574;
+        }
+
+        .bg-terracotta-glow {
+            background-color: #D4A574;
+        }
+
+        .text-clay-blush {
+            color: #F4C2A1;
+        }
+
+        .bg-clay-blush {
+            background-color: #F4C2A1;
+        }
+
+        .text-organic-cream {
+            color: #F8F6F0;
+        }
+
+        .bg-organic-cream {
+            background-color: #F8F6F0;
+        }
+
+        .text-urban-stone {
+            color: #7A8471;
+        }
+
+        .bg-urban-stone {
+            background-color: #7A8471;
+        }
+
+        .text-forest-deep {
+            color: #1A4D42;
+        }
+
+        .bg-forest-deep {
+            background-color: #1A4D42;
+        }
+
+        .category-card {
+            @apply relative rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300;
+        }
+
+        .category-card img {
+            @apply w-full h-64 object-cover;
+        }
+
+        .category-card .overlay {
+            @apply absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300;
+        }
+
+        .category-card .overlay-text {
+            @apply text-white text-xl font-semibold;
+        }
+
+        .product-tag {
+            @apply text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 20px;
+        }
+
+        .carousel-nav.next {
+            right: 20px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body class="bg-organic-cream">
+    <nav class="hero-bg bg-sage-bloom shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="home.html" class="flex items-center">
+                        <img src="68594babec3579.30797963Processed_upscaled-2.png" alt="aangan logo"
+                            class="h-20 w-auto">
+                    </a>
+                </div>
+                <div class="hidden md:flex text-forest-deep items-center space-x-4">
+                    <a class="nav-link" href="shop.html">Shop</a>
+                    <a class="nav-link" href="subscription.html">Subscription</a>
+                    <a class="nav-link" href="about.html">About Us</a>
+                    <a class="nav-link" href="workshops.html">Workshops</a>
+                    <a class="nav-link" href="blog.html">Blog</a>
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </div>
+                <div class="flex text-forest-deep items-center space-x-4">
+                    <a class="text-gray-600 hover:text-green-800" href="shop.html">
+                        <span class="text-forest-deep material-icons">search</span>
+                    </a>
+                    <a class="text-gray-600 hover:text-green-800" href="shop.html">
+                        <span class="text-forest-deep material-icons">shopping_bag</span>
+                    </a>
+                    <a class="text-gray-600 hover:text-green-800" href="shop.html">
+                        <span class="text-forest-deep material-icons">person_outline</span>
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden text-forest-deep hover:text-green-800">
+                        <span class="material-icons">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <a class="block px-4 py-2 text-sm text-organic-cream hover:bg-sage-bloom" href="shop.html">Shop</a>
+            <a class="block px-4 py-2 text-sm text-organic-cream hover:bg-sage-bloom"
+                href="subscription.html">Subscription</a>
+            <a class="block px-4 py-2 text-sm text-organic-cream hover:bg-sage-bloom" href="about.html">About Us</a>
+            <a class="block px-4 py-2 text-sm text-organic-cream hover:bg-sage-bloom"
+                href="workshops.html">Workshops</a>
+            <a class="block px-4 py-2 text-sm text-organic-cream hover:bg-sage-bloom" href="blog.html">Blog</a>
+            <a class="block px-4 py-2 text-sm text-organic-cream hover:bg-sage-bloom" href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <header class="hero-bg pt-16 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-center md:text-left">
+                <h1 class="text-5xl md:text-6xl section-title mb-6 leading-tight">
+                    Cultivate Your Urban Oasis
+                </h1>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Discover beautiful plants, stylish potters, and premium fertilizers to transform your city space
+                    into a green sanctuary with aangan.
+                </p>
+                <div class="space-y-4 sm:space-y-0 sm:space-x-4" style="font-family: 'Playfair Display', serif;">
+                    <a class="btn-primary inline-block bg-terracotta-glow p-4 rounded-full sm:w-auto"
+                        href="shop.html">Shop Collection</a>
+                    <a class="btn-secondary inline-block bg-terracotta-glow w-full p-4 rounded-full sm:w-auto"
+                        href="workshops.html">Join a Workshop</a>
+                </div>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide">
+                        <img alt="Modern living room with lush indoor plants and natural light"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2_iclqYA4h0KHK4JLW3Dwx278oP6G5HhpmVcsN2f5kF_uLmFUcZtBhrEdXngv1V5qMTHw_vX4M9R0YlWfWio0g8622XlcseT7WrP148huZU0FY37gIWWfcSXfEU7PtuyY4xnaJagmfmNSDAz9uSxS1usLmhD0Wzh1xSqDMBh38wN5wcKDSsKkPV0k7WM6jcqDFvekLcmhyOt49x4SUh8QcUerlsoFlFJtf5Fl4dX8xzxLfq8qzfZH3_aoIgos14vFNaF-BLL6vlzK" />
+                        <div class="carousel-overlay">
+                            <h3 class="text-xl font-bold mb-2">Living Room Oasis</h3>
+                            <p class="text-sm opacity-90">Transform your space with carefully selected plants</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img alt="Beautiful balcony garden with hanging plants and herb collection"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqbDMEP58C9VtyynXWai5I1qroTUvINy99XEl-RHs6DoFLouUKrxwvHYhPqVoMjehsncdwBPRUIgztdD127kfC8w57WgSKf_SXE0ZQh3xcuS7OHitjR1hHCt1HiCRGtc-w9vNC4XaihioGwdWnpBvh3kqBe3WXt39MQtjYH3pRQux3kgBbkgKmTyhP774vWOYVREJjkCGqoGJweot8SibhRByNx0F2aIj_jAyblg-eU1fBuiX2NQfkzJmnt3GUMo5aB0nzooF5mRz-" />
+                        <div class="carousel-overlay">
+                            <h3 class="text-xl font-bold mb-2">Balcony Paradise</h3>
+                            <p class="text-sm opacity-90">Create your own urban garden retreat</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img alt="Cozy reading corner with monstera and fiddle leaf fig plants"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEILZfT3AXkBNk187N07HRtUSZ4xFRAZ7OfJU8xeQdRxDFmpIBS4m9l-aS4U3jgWgj7hhROKfajV98unth8D5t9J-pl5z3RBwzuXUM3HlSVRFyME_WexDrAfSz0Uo9asKHy2k0kJmjXNaA2bsOSnkVuNm0XsT3D5ApOn3-xpHtD5iGz0jDEE84iQMQUow63mUVDJtAQu-9M-gjB3p3LSqJg4uRE1k3F5pNY0dFQGCdAvZ5JNSc1lmD6NUmliFJtjHK3YyVrlmMWvbZ" />
+                        <div class="carousel-overlay">
+                            <h3 class="text-xl font-bold mb-2">Reading Nook</h3>
+                            <p class="text-sm opacity-90">Bring nature indoors with statement plants</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img alt="Kitchen herb garden with fresh basil, mint and other cooking herbs"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfXgLiTBL2zecEl05rG3n0-vYLQBqqM-txDDHyvcOWVfvdCpac3O6olyW4esmh8kVr0UkoBi09EQqCIJeP0ONV2zp1079tuzJawWByA_ACBSOF9G2oL28wRSkqqbNIPrOa0SlBOWed6Qei9tRPExs7EVIZgzn2Oj0dVPF05ZxaDD6ZrLPQscZw92hUrdZRcY2EZZoC292z-FYwjL84zSvzzy9Jiqa6nKlu5BTABN6h8qmy6HBsPqRwi-pC62XeSHxLsNaZvTjXoUk0" />
+                        <div class="carousel-overlay">
+                            <h3 class="text-xl font-bold mb-2">Kitchen Garden</h3>
+                            <p class="text-sm opacity-90">Grow fresh herbs for your culinary adventures</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img alt="Home office setup with air-purifying plants and natural workspace design"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC09amrpsNyp-jqq_tBMBcubmiggbsMXA3xSYkkpOIToQX0bWbBd-AV8DXDM6iD16A9hlyy77uMbtzNgKw_C-KnxLIWf8UaAPT7yBo8P9qAOyGELCvH8b713drLigtoHABsqkVhSkJ1_32aeLSYULJzfr_0hDQF_RFh8SM2funBrd04wi8_gYcVFO95Br7dupOoRJv5nw4cO_Y74TKj3pCSgp3Vd2-cIufLeMK0L1K7mV-CWhXOElfLWSXXIqS_Lf1Nfgc_ETAHgRVO" />
+                        <div class="carousel-overlay">
+                            <h3 class="text-xl font-bold mb-2">Productive Workspace</h3>
+                            <p class="text-sm opacity-90">Boost creativity with air-purifying plants</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button class="carousel-nav prev" id="prevBtn">
+                    <span class="material-icons text-forest-deep">chevron_left</span>
+                </button>
+                <button class="carousel-nav next" id="nextBtn">
+                    <span class="material-icons text-forest-deep">chevron_right</span>
+                </button>
+
+                <!-- Indicators -->
+                <div class="carousel-indicators" id="carouselIndicators">
+                    <button class="carousel-indicator active" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                    <button class="carousel-indicator" data-slide="2"></button>
+                    <button class="carousel-indicator" data-slide="3"></button>
+                    <button class="carousel-indicator" data-slide="4"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="py-20 bg-forest-deep">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl text-organic-cream section-title text-center mb-16">Our Best Sellers</h2>
+            <div class="grid grid-cols-1 text-organic-cream sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="card">
+                    <img alt="Monstera Deliciosa plant" class="w-full h-72 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfXgLiTBL2zecEl05rG3n0-vYLQBqqM-txDDHyvcOWVfvdCpac3O6olyW4esmh8kVr0UkoBi09EQqCIJeP0ONV2zp1079tuzJawWByA_ACBSOF9G2oL28wRSkqqbNIPrOa0SlBOWed6Qei9tRPExs7EVIZgzn2Oj0dVPF05ZxaDD6ZrLPQscZw92hUrdZRcY2EZZoC292z-FYwjL84zSvzzy9Jiqa6nKlu5BTABN6h8qmy6HBsPqRwi-pC62XeSHxLsNaZvTjXoUk0" />
+                    <div class="p-6">
+                        <div class="flex text-organic-cream items-center mb-2">
+                            <span class="product-tag bg-green-200 rounded-lg p-2 text-green-800">Air Purifying</span>
+                            <span class="product-tag bg-blue-200 rounded-lg p-2 m-2 text-blue-800">Easy Care</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-organic-cream mb-2">Monstera Deliciosa</h3>
+                        <p class="text-gray-300 mb-1">Iconic and easy to care for.</p>
+                        <p class="text-xl font-bold text-terracotta-glow mb-4">₹595</p>
+                        <button
+                            class="w-full bg-terracotta-glow text-white py-2 rounded-lg hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                            <span class="material-icons mr-2">add_shopping_cart</span> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img alt="Terracotta planter set" class="w-full h-72 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyrx3Sv2DHB-rmeRygbPeGrBQ86c3V0VdU0G7PjbF5rKTsowoubp49QBGbHMRuGXEmdx6-Q5WdsgQm63CjXaVcH5UxU0rMgXapg6qMr8C2pNRuOGdaVNRv9bQUvVeyiqqC33yqyKwpdV9DG9nXd6cJ1a1WLLH5t-eIiAFcng62gsvDuhX9ilNxbVMdHQGA4ArFAQ_sog9vhN3cgRQudQYKY2tkwXNm1_piJNU89669jCJT8o1tYgWyZfAGqz4g57_1tjazjhQxLRfL" />
+                    <div class="p-6">
+                        <div class="flex text-organic-cream items-center mb-2">
+                            <span class="product-tag bg-yellow-200 rounded-lg p-2 text-yellow-800">Hand-crafted</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-organic-cream mb-2">Artisan Terracotta Pot</h3>
+                        <p class="text-gray-300 mb-1">Handcrafted, breathable design.</p>
+                        <p class="text-xl font-bold text-terracotta-glow mb-4">₹385</p>
+                        <button
+                            class="w-full bg-terracotta-glow text-white py-2 rounded-lg hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                            <span class="material-icons mr-2">add_shopping_cart</span> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img alt="Organic plant food" class="w-full h-72 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC09amrpsNyp-jqq_tBMBcubmiggbsMXA3xSYkkpOIToQX0bWbBd-AV8DXDM6iD16A9hlyy77uMbtzNgKw_C-KnxLIWf8UaAPT7yBo8P9qAOyGELCvH8b713drLigtoHABsqkVhSkJ1_32aeLSYULJzfr_0hDQF_RFh8SM2funBrd04wi8_gYcVFO95Br7dupOoRJv5nw4cO_Y74TKj3pCSgp3Vd2-cIufLeMK0L1K7mV-CWhXOElfLWSXXIqS_Lf1Nfgc_ETAHgRVO" />
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="product-tag rounded-lg bg-green-200 p-2 text-green-800">Organic</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-organic-cream mb-2">Organic Plant Food</h3>
+                        <p class="text-gray-300 mb-1">Boosts growth and vitality.</p>
+                        <p class="text-xl font-bold text-terracotta-glow mb-4">₹275</p>
+                        <button
+                            class="w-full bg-terracotta-glow text-white py-2 rounded-lg hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                            <span class="material-icons mr-2">add_shopping_cart</span> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img alt="Gardening Tool Set" class="w-full h-72 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0l-Sz_lPAUsPCfbkQwpwckGSw8KQT_5R8sMTTdsiDCmC5aakDQXpipQZI6jVmAAEFLR0gxSysVMM10Qkwx5SlKCLeHVxUv2UFWyNAuKcav_M7H3Arg-qrrN0W5MihEDmiXh3j8ezogFEfImSKOGkRFDEVUVEDbfVAQaXrgPKI9wZtPpgpxkiXVgv12IlWsdia5lRepCI2Z-Ipi0GZ7ZWPpxoB6to9WG8SOCVN45SC2WGEzFQOM3B7VaSebFfJZnd4YaqEpQJod_q9" />
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <span class="product-tag bg-gray-200 p-2 rounded-lg text-gray-800">Essential</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-organic-cream mb-2">Gardening Tool Set</h3>
+                        <p class="text-gray-300 mb-1">Durable and ergonomic tools.</p>
+                        <p class="text-xl font-bold text-terracotta-glow mb-4">₹795</p>
+                        <button
+                            class="w-full bg-terracotta-glow text-white py-2 rounded-lg hover:bg-green-700 transition duration-300 flex items-center justify-center">
+                            <span class="material-icons mr-2">add_shopping_cart</span> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-white" id="shop">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl section-title text-center mb-16">Shop by Category</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="category-card">
+                    <img alt="Indoor plants category"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEILZfT3AXkBNk187N07HRtUSZ4xFRAZ7OfJU8xeQdRxDFmpIBS4m9l-aS4U3jgWgj7hhROKfajV98unth8D5t9J-pl5z3RBwzuXUM3HlSVRFyME_WexDrAfSz0Uo9asKHy2k0kJmjXNaA2bsOSnkVuNm0XsT3D5ApOn3-xpHtD5iGz0jDEE84iQMQUow63mUVDJtAQu-9M-gjB3p3LSqJg4uRE1k3F5pNY0dFQGCdAvZ5JNSc1lmD6NUmliFJtjHK3YyVrlmMWvbZ" />
+                    <a href="shop.html" class="overlay">
+                        <span class="overlay-text">Indoor Plants</span>
+                    </a>
+                </div>
+                <div class="category-card">
+                    <img alt="Stylish potters category"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqbDMEP58C9VtyynXWai5I1qroTUvINy99XEl-RHs6DoFLouUKrxwvHYhPqVoMjehsncdwBPRUIgztdD127kfC8w57WgSKf_SXE0ZQh3xcuS7OHitjR1hHCt1HiCRGtc-w9vNC4XaihioGwdWnpBvh3kqBe3WXt39MQtjYH3pRQux3kgBbkgKmTyhP774vWOYVREJjkCGqoGJweot8SibhRByNx0F2aIj_jAyblg-eU1fBuiX2NQfkzJmnt3GUMo5aB0nzooF5mRz-" />
+                    <a href="shop.html" class="overlay">
+                        <span class="overlay-text">Potters & Planters</span>
+                    </a>
+                </div>
+                <div class="category-card">
+                    <img alt="Fertilizers and soil category"
+                        src="https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-29b0-622f-b007-7cb218da09fe/raw?se=2025-06-24T14%3A30%3A22Z&sp=r&sv=2024-08-04&sr=b&scid=09687a92-cf9c-5b32-8a26-c1c2802028b9&skoid=bbd22fc4-f881-4ea4-b2f3-c12033cf6a8b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-23T23%3A30%3A30Z&ske=2025-06-24T23%3A30%3A30Z&sks=b&skv=2024-08-04&sig=9Vq2FRwPyCWx74rO3uEmQUJy6t2MNi2hH%2BYway8QSEw%3D" />
+                    <a href="shop.html" class="overlay">
+                        <span class="overlay-text">Fertilizers & Soil</span>
+                    </a>
+                </div>
+                <div class="category-card">
+                    <img alt="Gardening tools category"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0l-Sz_lPAUsPCfbkQwpwckGSw8KQT_5R8sMTTdsiDCmC5aakDQXpipQZI6jVmAAEFLR0gxSysVMM10Qkwx5SlKCLeHVxUv2UFWyNAuKcav_M7H3Arg-qrrN0W5MihEDmiXh3j8ezogFEfImSKOGkRFDEVUVEDbfVAQaXrgPKI9wZtPpgpxkiXVgv12IlWsdia5lRepCI2Z-Ipi0GZ7ZWPpxoB6to9WG8SOCVN45SC2WGEzFQOM3B7VaSebFfJZnd4YaqEpQJod_q9" />
+                    <a href="shop.html" class="overlay">
+                        <span class="overlay-text">Gardening Tools</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-clay-blush">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl section-title mb-12">Current Offers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-forest-deep mb-2">Flat 10% Off</h3>
+                    <p class="text-gray-700 mb-4">On orders above ₹999</p>
+                    <div class="bg-organic-cream border-2 border-dashed border-terracotta-glow rounded-lg py-2 px-4">
+                        <span class="text-lg font-mono text-terracotta-glow">aangan10</span>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-forest-deep mb-2">Free Potting Mix</h3>
+                    <p class="text-gray-700 mb-4">With any plant purchase</p>
+                    <div class="bg-organic-cream border-2 border-dashed border-terracotta-glow rounded-lg py-2 px-4">
+                        <span class="text-lg font-mono text-terracotta-glow">FREEBIE</span>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-forest-deep mb-2">20% Off Workshops</h3>
+                    <p class="text-gray-700 mb-4">Book a spot this month</p>
+                    <div class="bg-organic-cream border-2 border-dashed border-terracotta-glow rounded-lg py-2 px-4">
+                        <span class="text-lg font-mono text-terracotta-glow">GROW20</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-sage-bloom text-white" id="about">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <img alt="People gardening together in an urban setting"
+                    class="rounded-xl shadow-xl w-full h-auto object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtnuloj3-c4nlhG6J2WYOE5lmbMmUeFVDJSdohTTRzOGtVGZ48l9ABFNiwl6RmKN18_OqgWm2BDKE6b0EhoVWM78_Z4uR2VryKfWs0nHg1yF1X9C8GD1GFMk_79LcAcNS7xDLpXPd4oeikQQvPt8-UDthnj-_tP_rtp3D44f6nkz_DuDr-IpThoDns__ECpc6S5GR50Yzq120xQreTx3e-APsfGRoFpBLBNncUjxce-qcU9ITRFhM_Zzi5gVQaP9wSgniSx3ErDLty"
+                    style="max-height: 450px;" />
+            </div>
+            <div class="text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-6" style="font-family: 'Playfair Display', serif;">Our Vision for
+                    aangan</h2>
+                <p class="text-lg mb-6 leading-relaxed">
+                    At aangan, we believe that everyone deserves a touch of nature, no matter how small their space.
+                    We're passionate about bringing the joy of gardening to urban dwellers, offering curated collections
+                    and expert advice to help you create your own green haven.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    Our products are sustainably sourced and chosen for their quality and beauty, reflecting our
+                    commitment to both nature and design. Join our community and let's grow together.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl section-title mb-12">What Our Customers Say</h2>
+            <div class="space-y-10">
+                <div class="bg-organic-cream p-8 rounded-xl shadow-lg">
+                    <p class="text-lg text-gray-700 italic mb-4">"aangan has transformed my balcony into a green
+                        paradise! The quality of their plants is amazing, and the terracotta pots are just beautiful.
+                        Highly recommend!"</p>
+                    <p class="font-semibold text-forest-deep">- Priya S., Chitradurga</p>
+                </div>
+                <div class="bg-organic-cream p-8 rounded-xl shadow-lg">
+                    <p class="text-lg text-gray-700 italic mb-4">"I was new to gardening, but aangan's resources and
+                        friendly staff made it so easy. My plants are thriving!"</p>
+                    <p class="font-semibold text-forest-deep">- Rohan K., Bangalore</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-urban-stone text-white" id="contact">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6" style="font-family: 'Playfair Display', serif;">Join the aangan Family
+            </h2>
+            <p class="text-lg mb-8 leading-relaxed">
+                Subscribe to our newsletter for exclusive offers, gardening tips, and inspiration for your urban garden.
+            </p>
+            <form class="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
+                <input
+                    class="flex-grow px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-sage-bloom"
+                    placeholder="Enter your email" required="" type="email" />
+                <button
+                    class="bg-terracotta-glow text-forest-deep px-6 py-3 rounded-lg font-medium hover:bg-opacity-80 transition duration-300"
+                    type="submit">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+    <footer class="footer-bg text-organic-cream py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4" style="font-family: 'Playfair Display', serif;">aangan</h3>
+                    <p class="text-sm text-gray-300">Bringing nature to your urban doorstep. High-quality plants, pots,
+                        and gardening essentials.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-sage-bloom mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a class="hover:text-terracotta-glow transition" href="shop.html">Shop</a></li>
+                        <li><a class="hover:text-terracotta-glow transition" href="about.html">About Us</a></li>
+                        <li><a class="hover:text-terracotta-glow transition" href="blog.html">Blog</a></li>
+                        <li><a class="hover:text-terracotta-glow transition" href="contact.html">Contact Us</a></li>
+                        <li><a class="hover:text-terracotta-glow transition" href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-sage-bloom mb-4">Customer Service</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a class="hover:text-terracotta-glow transition" href="#">Shipping &amp; Returns</a></li>
+                        <li><a class="hover:text-terracotta-glow transition" href="#">Track Order</a></li>
+                        <li><a class="hover:text-terracotta-glow transition" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-terracotta-glow transition" href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-sage-bloom mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a class="text-organic-cream hover:text-terracotta-glow transition" href="#">
+                            <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path clip-rule="evenodd"
+                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                    fill-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                        <a class="text-organic-cream hover:text-terracotta-glow transition" href="#">
+                            <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.04c-2.89 0-3.25.01-4.4.06-1.15.05-1.94.22-2.63.5C4.28 2.9 3.72 3.35 3.26 3.8c-.47.47-.92 1.02-1.22 1.7-.28.7-.44 1.48-.49 2.63-.05 1.15-.06 1.51-.06 4.4s.01 3.25.06 4.4c.05 1.15.22 1.94.5 2.63.3.7.75 1.25 1.22 1.72.47.47 1.02.92 1.7 1.22.7.28 1.48.44 2.63.49 1.15.05 1.51.06 4.4.06s3.25-.01 4.4-.06c1.15-.05 1.94-.22 2.63-.5.7-.3 1.25-.75 1.72-1.22.47-.47.92-1.02 1.22-1.7.28-.7.44-1.48.49-2.63.05-1.15.06-1.51.06-4.4s-.01-3.25-.06-4.4c-.05-1.15-.22-1.94-.5-2.63-.3-.7-.75-1.25-1.22-1.72-.47-.47-1.02-.92-1.7-1.22-.7-.28-1.48-.44-2.63-.49A104.83 104.83 0 0012 2.04zm0 1.89c2.85 0 3.19.01 4.3.06 1.06.05 1.66.21 2.08.38.51.21.88.49 1.25.87.38.38.66.74.87 1.25.17.42.33 1.02.38 2.08.05 1.11.06 1.45.06 4.3s-.01 3.19-.06 4.3c-.05 1.06-.21 1.66-.38 2.08-.21.51-.49.88-.87 1.25-.38.38-.74.66-1.25.87-.42.17-1.02.33-2.08.38-1.11.05-1.45.06-4.3.06s-3.19-.01-4.3-.06c-1.06-.05-1.66-.21-2.08-.38-.51-.21-.88-.49-1.25-.87-.38-.38-.66-.74-.87-1.25-.17-.42-.33-1.02-.38-2.08-.05-1.11-.06-1.45-.06-4.3s.01-3.19.06-4.3c.05-1.06.21-1.66.38-2.08.21-.51.49-.88.87-1.25.38-.38.74-.66-1.25-.87.42-.17 1.02-.33 2.08-.38 1.11-.05 1.45-.06 4.3-.06zM12 7.15a4.85 4.85 0 100 9.7 4.85 4.85 0 000-9.7zm0 7.91a3.06 3.06 0 110-6.12 3.06 3.06 0 010 6.12zM16.96 6.1a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z">
+                                </path>
+                            </svg>
+                            <span class="sr-only">Instagram</span>
+                        </a>
+                        <a class="text-organic-cream hover:text-terracotta-glow transition" href="#">
+                            <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                                </path>
+                            </svg>
+                            <span class="sr-only">Twitter</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+                <p>© 2024 aangan. All rights reserved. Designed with <span class="text-terracotta-glow">♥</span> for
+                    urban gardeners.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Carousel functionality
+        class Carousel {
+            constructor() {
+                this.track = document.getElementById('carouselTrack');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.indicators = document.querySelectorAll('.carousel-indicator');
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.currentSlide = 0;
+                this.totalSlides = this.slides.length;
+                this.autoplayInterval = null;
+
+                this.init();
+            }
+
+            init() {
+                // Add event listeners
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+                this.indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                // Start autoplay
+                this.startAutoplay();
+
+                // Pause autoplay on hover
+                this.track.parentElement.addEventListener('mouseenter', () => this.stopAutoplay());
+                this.track.parentElement.addEventListener('mouseleave', () => this.startAutoplay());
+
+                // Handle keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.prevSlide();
+                    if (e.key === 'ArrowRight') this.nextSlide();
+                });
+            }
+
+            updateCarousel() {
+                // Move the track
+                const translateX = -this.currentSlide * 100;
+                this.track.style.transform = `translateX(${translateX}%)`;
+
+                // Update indicators
+                this.indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.updateCarousel();
+            }
+
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.updateCarousel();
+            }
+
+            goToSlide(slideIndex) {
+                this.currentSlide = slideIndex;
+                this.updateCarousel();
+            }
+
+            startAutoplay() {
+                this.autoplayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 2000); // Change slide every 4 seconds
+            }
+
+            stopAutoplay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
+                }
+            }
+        }
+
+        // Initialize carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new Carousel();
+        });
+    </script>
+</body>
+
+</html>
